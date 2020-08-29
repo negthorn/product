@@ -1,4 +1,4 @@
-package app.neg.ts;
+package app.neg.ecomm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
