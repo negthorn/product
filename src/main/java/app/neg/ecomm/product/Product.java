@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "product")
 public class Product {
@@ -29,11 +31,28 @@ public class Product {
 	@Column(name="quantity")
 	private int quantity;
 	
-	@Column(name="date_added")
-	private Date dateAdded;
+	@Column(name="date_created")
+	private Date dateCreated;
 	
 	@Column(name="date_last_modified")
 	private Date dateLastModified;
+	
+	public Product() {
+		this.dateCreated = new Date();
+		this.dateLastModified = new Date();
+	}
+	
+	public Product(
+			@JsonProperty("name") String name,
+			@JsonProperty("category") String category,
+			@JsonProperty("description") String description, 
+			@JsonProperty("quantity") int quantity) {
+		this();
+		this.name = name;
+		this.category = category;
+		this.description = description;
+		this.quantity = quantity;
+	}
 	
 	
 	
@@ -67,11 +86,11 @@ public class Product {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public Date getDateAdded() {
-		return dateAdded;
+	public Date getDateCreated() {
+		return dateCreated;
 	}
-	public void setDateAdded(Date dateAdded) {
-		this.dateAdded = dateAdded;
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 	public Date getDateLastModified() {
 		return dateLastModified;
@@ -80,5 +99,12 @@ public class Product {
 		this.dateLastModified = dateLastModified;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Product:{id: %d, name: %s, cat: %s, descr:%s, qty:%d, add:%s, mod:%s }", 
+					this.id, this.name, this.category, this.description,
+					this.quantity, this.dateCreated, this.dateLastModified);
+	}
+	
 	
 }
