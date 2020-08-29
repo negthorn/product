@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 @Entity
 @Table(name = "product")
 public class Product {
@@ -19,40 +17,40 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="name")
+	@Column(name="name", nullable = false)
 	private String name;
 	
-	@Column(name="category")
-	private String category;
+	@Column(name="category", nullable = false)
+	private String category = "Miscellaneous";
 	
 	@Column(name="description")
 	private String description;
 	
-	@Column(name="quantity")
+	@Column(name="quantity", nullable = false)
 	private int quantity;
 	
-	@Column(name="date_created")
-	private Date dateCreated;
+	@Column(name="date_created",  nullable = false, insertable = false)
+	private Date dateCreated = new Date();
 	
-	@Column(name="date_last_modified")
-	private Date dateLastModified;
+	@Column(name="date_last_modified", nullable = false)
+	private Date dateLastModified = new Date();
 	
-	public Product() {
-		this.dateCreated = new Date();
-		this.dateLastModified = new Date();
-	}
-	
-	public Product(
-			@JsonProperty("name") String name,
-			@JsonProperty("category") String category,
-			@JsonProperty("description") String description, 
-			@JsonProperty("quantity") int quantity) {
-		this();
-		this.name = name;
-		this.category = category;
-		this.description = description;
-		this.quantity = quantity;
-	}
+//	public Product() {
+//		this.dateCreated = new Date();
+//		this.dateLastModified = new Date();
+//	}
+//	
+//	public Product(
+//			@JsonProperty("name") String name,
+//			@JsonProperty("category") String category,
+//			@JsonProperty("description") String description, 
+//			@JsonProperty("quantity") int quantity) {
+//		this();
+//		this.name = name;
+//		this.category = category;
+//		this.description = description;
+//		this.quantity = quantity;
+//	}
 	
 	
 	

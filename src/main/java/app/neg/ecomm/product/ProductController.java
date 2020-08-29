@@ -1,6 +1,6 @@
 package app.neg.ecomm.product;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,8 +21,13 @@ public class ProductController {
 	
 	
 	@GetMapping
-	public List<Product> findAll(){
-		return service.findAll();
+	public ProductList findAll(
+			@RequestParam("orderBy") Optional<String> orderBy,
+			@RequestParam("direction") Optional<String> direction,
+			@RequestParam("page") Optional<Integer> pageNum,
+			@RequestParam("pageSize") Optional<Integer> pageSize
+			){
+		return new ProductList(service.findAll(orderBy, direction, pageNum, pageSize));
 	}
 	
 	@GetMapping(path = "{id}")
@@ -34,13 +40,13 @@ public class ProductController {
 		return service.add(p);
 	}
 	
-	@PutMapping("{id}")
-	public Product update(Product p) {
+	@PutMapping(path = "{id}")
+	public Product update(@RequestBody Product p) {
 		return service.update(p);
 	}
 	
 	@DeleteMapping
-	public Product delete(Product p) {
+	public Product delete(@RequestBody Product p) {
 		return service.delete(p);
 	}
 	
