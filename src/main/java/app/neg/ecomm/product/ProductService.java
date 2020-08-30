@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import app.neg.ecomm.category.CategoryCounter;
+
 @Service
 public class ProductService {
 	@Autowired
@@ -59,6 +61,10 @@ public class ProductService {
 	public Product delete(Product p) {
 		dao.delete(p);
 		return p;
+	}
+
+	public List<CategoryCounter> getProductCount() {
+		return dao.findCategoryCount();
 	}
 
 }
