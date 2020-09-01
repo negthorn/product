@@ -40,6 +40,15 @@ public class ProductController {
 		return service.add(p);
 	}
 	
+	@PostMapping(path = "{id}/order/{count}")
+	public Product orderProduct(@PathVariable("id") int id, @PathVariable("count") int count) {
+		Product product = service.findById(id);
+		
+	//TODO ... 
+//		service.add(product);
+		return product;
+	}
+	
 	@PutMapping(path = "{id}")
 	public Product update(@RequestBody Product p) {
 		return service.update(p);
@@ -49,13 +58,5 @@ public class ProductController {
 	public Product delete(@RequestBody Product p) {
 		return service.delete(p);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
