@@ -97,12 +97,12 @@ public class Product {
 		this.dateLastModified = dateLastModified;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("Product:{id: %d, name: %s, cat: %s, descr:%s, qty:%d, add:%s, mod:%s }", 
-					this.id, this.name, this.category, this.description,
-					this.quantity, this.dateCreated, this.dateLastModified);
-	}
+//	@Override
+//	public String toString() {
+//		return String.format("Product:{id: %d, name: %s, cat: %s, descr:%s, qty:%d, add:%s, mod:%s }", 
+//					this.id, this.name, this.category, this.description,
+//					this.quantity, this.dateCreated, this.dateLastModified);
+//	}
 	
 	
 }

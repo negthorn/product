@@ -67,4 +67,29 @@ public class ProductService {
 		return dao.findCategoryCount();
 	}
 
+	
+	public ProductOrderResponse orderProduct(int id, int count) {
+		
+		int qty = 0;
+		Optional<Product> p = dao.findById(id);
+		
+		if(p.isPresent()) {
+			qty = p.get().getQuantity();
+		} else {
+			return new ProductOrderResponse.FAIL("No such item.");
+		}
+		
+		if (qty < count) {
+			return new ProductOrderResponse.FAIL("Not enough items.");
+		}
+		
+		String message = "You've ordered "+count+" item(s).";
+		
+		try {
+			dao.orderProduct(id, count);
+		} catch (Exception e) {
+			return new ProductOrderResponse.FAIL(message + " But meanwhile the quantity dropped.");
+		}
+		return new ProductOrderResponse.SUCCESS(message);
+	}
 }

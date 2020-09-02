@@ -41,12 +41,8 @@ public class ProductController {
 	}
 	
 	@PostMapping(path = "{id}/order/{count}")
-	public Product orderProduct(@PathVariable("id") int id, @PathVariable("count") int count) {
-		Product product = service.findById(id);
-		
-	//TODO ... 
-//		service.add(product);
-		return product;
+	public ProductOrderResponse orderProductG(@PathVariable("id") int id, @PathVariable("count") int count) {
+		return service.orderProduct(id, count);
 	}
 	
 	@PutMapping(path = "{id}")
